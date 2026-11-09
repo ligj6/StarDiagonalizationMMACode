@@ -92,8 +92,8 @@ A\star C=\sum_{j\geq0}B^j\mathcal{C}_j[A,C],
 \mathcal{C}_j[A,C]=
 \frac{(-\mathrm{i}/2)^j}{j!}
 \sum_{\ell=0}^{j}(-1)^\ell\binom{j}{\ell}
-\left(\partial_x^{j-\ell}\partial_y^\ell A\right)
-\left(\partial_x^\ell\partial_y^{j-\ell}C\right).
+\left(\frac{\partial^{j}A}{\partial x^{j-\ell}\,\partial y^{\ell}}\right)
+\left(\frac{\partial^{j}C}{\partial x^{\ell}\,\partial y^{j-\ell}}\right).
 ```
 
 The function `starN[A, C, j]` calculates $`\mathcal{C}_j[A,C]`$, **without** the factor $`B^j`$. Changing `starSign` to `I/2` reverses the commutator convention.
@@ -140,12 +140,13 @@ Here $`I_N`$ is the identity matrix and $`\dagger`$ denotes Hermitian conjugatio
 
 ### 1. Form the known sources — Eq. (22)
 
-Suppose $`U_0,\ldots,U_{n-1}`$ have been determined. Define the known partial series $`U_{<n}=\sum_{r=0}^{n-1}B^rU_r`$ and extract
+Suppose $`U_0,\ldots,U_{n-1}`$ have been determined. Define the known partial series $`U_{\mathrm{known}}=\sum_{r=0}^{n-1}B^rU_r`$ and extract
 
 ```math
-R_n=[B^n]\left(U_{<n}^\dagger\star U_{<n}-I_N\right),
-\qquad
-S_n=[B^n]\left(U_{<n}^\dagger\star H\star U_{<n}\right).
+\begin{aligned}
+R_n&=[B^n]\left(U_{\mathrm{known}}^\dagger\star U_{\mathrm{known}}-I_N\right),\\
+S_n&=[B^n]\left(U_{\mathrm{known}}^\dagger\star H\star U_{\mathrm{known}}\right).
+\end{aligned}
 ```
 
 These are exactly the sources obtained by setting the unknown $`U_n`$ to zero in the order-$`n`$ equations. They are coefficient matrices, not quantities multiplied by $`B^n`$. Since $`n\geq1`$, subtracting the identity does not change `R` in the implementation.
